@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>チャットアプリ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        #room-list { margin-top: 30px; }
+        .room { padding: 8px; border-bottom: 1px solid #eee; display: flex; align-items: center; }
+        .room-name { flex: 1; }
+        .delete-btn { margin-left: 10px; }
+        #create-room { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>チャットアプリ</h1>
+    <form id="create-room" method="post">
+        <input name="room_name" placeholder="部屋名を入力" required />
+        <button type="submit">部屋を作成</button>
+    </form>
+    <div id="room-list">
+        <h2>作成されているチャット部屋</h2>
+        {% if rooms %}
+            <ul>
+            {% for room in rooms %}
+                <li class="room">
+                    <span class="room-name"><a href="/room/{{ room }}">{{ room }}</a></span>
+                    {% if get_room_owner(room) == user_id %}
+                    <form method="post" action="/delete_room/{{ room }}" style="display:inline;">
+                        <button class="delete-btn" type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+                    </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>まだ部屋はありません。</p>
+        {% endif %}
+    </div>
+</body>
+</html>

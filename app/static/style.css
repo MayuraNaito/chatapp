@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; margin: 40px; }
+#room-list { margin-top: 30px; }
+.room { padding: 8px; border-bottom: 1px solid #eee; display: flex; align-items: center; }
+.room-name { flex: 1; }
+.delete-btn { margin-left: 10px; }
+#create-room { margin-bottom: 20px; }
+#chat { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; }
+#msg { width: 80%; }
+#send { width: 15%; }
