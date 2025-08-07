@@ -1,47 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>チャットアプリ</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>チャットアプリ</h1>
-    <form method="post">
-        <input name="username" placeholder="あなたの名前" value="{{ username or '' }}" required />
-        <button type="submit" name="set_name">名前を設定</button>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul>
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-    </form>
-    <form id="create-room" method="post">
-        <input name="room_name" placeholder="部屋名を入力" required />
-        <button type="submit">部屋を作成</button>
-    </form>
-    <div id="room-list">
-        <h2>作成されているチャット部屋</h2>
-        {% if rooms %}
-            <ul>
-            {% for room in rooms %}
-                <li class="room">
-                    <span class="room-name"><a href="/room/{{ room }}">{{ room }}</a></span>
-                    {% if get_room_owner(room) == user_id %}
-                    <form method="post" action="/delete_room/{{ room }}" style="display:inline;">
-                        <button class="delete-btn" type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
-                    </form>
-                    {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>まだ部屋はありません。</p>
-        {% endif %}
+{% set sub_title = "トップページ" %}
+{% include 'common/header.html' %}
+    <div class="container">
+        <div class="form-box">
+            <h2>ログイン</h2>
+            <form method="post" class="login-form">
+                <input name="username" placeholder="ユーザー名" required class="input-full login-input" />
+                <input name="password" type="password" placeholder="パスワード" required class="input-full login-input" />
+                <button class="btn login-btn" type="submit">ログイン</button>
+            </form>
+            <div class="or">または</div>
+            <form method="get" action="/register" class="register-form">
+                <button class="btn register-btn" type="submit">アカウントを作成</button>
+            </form>
+            <div style="margin-top:16px;">
+                <a href="/">← トップへ戻る</a>
+            </div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </div>
     </div>
-</body>
-</html>
+{% include 'common/footer.html' %}

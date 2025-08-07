@@ -1,25 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ユーザー登録</title>
-</head>
-<body>
-    <h1>ユーザー登録</h1>
-    <form method="post">
-        <input name="username" placeholder="ユーザー名" required><br>
-        <input name="password" type="password" placeholder="パスワード" required><br>
-        <button type="submit">登録</button>
-    </form>
-    <a href="/login">ログインはこちら</a>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-</body>
-</html>
+{% set sub_title = "アカウント登録" %}
+{% include 'common/header.html' %}
+    <div class="container">
+        <div class="form-box">
+            <h2>アカウント作成</h2>
+            <form method="post" class="register-form">
+                <input name="username" placeholder="ユーザー名" required class="input-full login-input" />
+                <input name="password" type="password" placeholder="パスワード" required class="input-full login-input" />
+                <button class="btn register-btn" type="submit">登録</button>
+            </form>
+            <div class="or">または</div>
+            <form method="get" action="/login" class="login-form">
+                <button class="btn login-btn" type="submit">アカウントでログイン</button>
+            </form>
+            <div style="margin-top:16px;">
+                <a href="/">← トップへ戻る</a>
+            </div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+{% include 'common/footer.html' %}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config['APP_TITLE'] }}{% if sub_title is defined and sub_title %} | {{ sub_title }}{% endif %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('app', 'static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('app', 'static', filename='mobile.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{% block header_title %}{{ config['APP_TITLE'] }}{% endblock %}</h1>
+    </header>
